@@ -1,0 +1,52 @@
+-- Criar a tabela Municipio
+CREATE TABLE Municipio (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    uf VARCHAR(2) NOT NULL,
+    populacao INT,
+    coordenadas POINT -- Tipo 'geo' mapeado para o tipo espacial POINT no MySQL
+);
+
+-- Criar a tabela Criterio
+CREATE TABLE Criterio (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    tipo ENUM('B', 'C') NOT NULL,
+    peso FLOAT NOT NULL,
+    unidade VARCHAR(50)
+);
+
+-- Criar a tabela MatrizDecisao (Tabela associativa entre Municipio e Criterio)
+CREATE TABLE MatrizDecisao (
+    municipio_id INT NOT NULL,
+    criterio_id INT NOT NULL,
+    valor FLOAT NOT NULL,
+    PRIMARY KEY (municipio_id, criterio_id),
+    CONSTRAINT fk_matriz_municipio 
+        FOREIGN KEY (municipio_id) REFERENCES Municipio(id) 
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_matriz_criterio 
+        FOREIGN KEY (criterio_id) REFERENCES Criterio(id) 
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Criar a tabela SimulacaoTOPSIS
+CREATE TABLE SimulacaoTOPSIS (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    data_execucao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    usuario_id INT NOT NULL, -- FK referenciando a tabela de utilizadores do seu sistema
+    parametros JSON NOT NULL
+);
+CREATE TABLE ResultadoRanking (
+simulacao_id int NOT NULL,
+municipio_id int NOT NULL,
+coeficiente_proximidade float NOT NULL,
+posicao_ranking int NOT NULL,
+PRIMARY KEY (municipio_id, simulacao_id),
+CONSTRAINT fk_ranking_simulacao 
+        FOREIGN KEY (simulacao_id) REFERENCES SimulacaoTOPSIS(id) 
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_ranking_municipio 
+        FOREIGN KEY (municipio_id) REFERENCES Municipio(id) 
+        ON DELETE CASCADE ON UPDATE CASCADE 
+);
