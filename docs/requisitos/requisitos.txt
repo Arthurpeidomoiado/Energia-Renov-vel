@@ -1,0 +1,19 @@
+**Requisitos Funcionais**
+RF01 - Cadastrar municípios/comunidades com dados socioeconómicos (Prioridade: Alta)
+RF02 - Cadastrar indicadores e critérios de vulnerabilidade (Prioridade: Alta)
+RF03 - Configurar pesos dos critérios TOPSIS (Prioridade: Alta)
+RF04 - Executar cálculo TOPSIS e gerar ranking (Prioridade: Alta)
+RF05 - Visualizar resultados em dashboard com gráficos (Prioridade: Média)
+RF06 - Exportar relatórios em PDF/CSV (Prioridade: Média)
+RF07 - Visualização georreferenciada (mapa) (Prioridade: Média)
+RF08 - Gerenciar usuários e perfis de acesso (Prioridade: Alta)
+RF09 - Importar dados de fontes externas (IBGE, ANEEL) (Prioridade: Baixa)
+RF10 - Histórico de simulações TOPSIS (Prioridade: Baixa)
+
+**Requisitos Não Funcionais**
+RNF01 - Tempo de resposta do cálculo TOPSIS < 3s para 500 alternativas (Categoria ISO 25010: Eficiência de Desempenho)
+RNF02 - Interface responsiva (desktop, tablet, mobile) (Categoria ISO 25010: Usabilidade)
+RNF03 - Disponibilidade ≥ 99,5% (Categoria ISO 25010: Confiabilidade)
+RNF04 - Autenticação via JWT com criptografia bcrypt (Categoria ISO 25010: Segurança)
+RNF05 - Código com cobertura de testes ≥ 80% (Categoria ISO 25010: Manutenibilidade)
+RNF06 - Documentação via Swagger/OpenAPI (Categoria ISO 25010: Portabilidade)
